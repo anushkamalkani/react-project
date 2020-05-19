@@ -1,16 +1,16 @@
 const router = require('express').Router();
 let Project = require('../models/project.model');
 
-router.route('/project').get((req, res) => {
+router.route('/').get((req, res) => {
   Project.find()
     .then(project => res.json(project))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add/project').post((req, res) => {
+router.route('/add').post((req, res) => {
   const project = req.body.project;
 
-  const newProject = new Project({project});
+  const newProject = new Project({"Project": project});
 
   newProject.save()
     .then(() => res.json('Project added!'))

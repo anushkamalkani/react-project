@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+// import { ConnectionStates } from 'mongoose';
 
-const Task = props => (
+
+
+
+
+const Task = props => {
+  const startdate = new Date (Number(props.task.startdate))
+  const enddate = new Date (Number(props.task.enddate))
+  console.log(props.task.startdate, startdate )
+return   (
   <tr>
     <td>{props.task.username}</td>
     <td>{props.task.task}</td>
     <td>{props.task.project}</td>
-    <td>{props.task.startdate.substring(0,10)}</td>
-    <td>{props.task.enddate.substring(0,10)}</td>
+    <td>{`${startdate.getDate()}/${startdate.getMonth()+1}/${startdate.getFullYear()}`  }</td>
+    <td>{`${enddate.getDate()}/${enddate.getMonth()+1}/${enddate.getFullYear()}`  }</td>
     {/* <td>
       <Link to={"/edit/"+props.task._id}>edit</Link> | <a href="#" onClick={() => { props.deleteTask(props.task._id) }}>delete</a>
     </td> */}
   </tr>
 )
+}
 
 export default class TaskList extends Component {
   constructor(props) {
@@ -21,11 +31,11 @@ export default class TaskList extends Component {
 
     this.deleteTask = this.deleteTask.bind(this)
 
-    this.state = {tasks: []};
+    this.state = {task: []};
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/task/')
+    axios.get('http://localhost:5000/task')
       .then(response => {
         this.setState({ task: response.data })
       })
@@ -39,12 +49,12 @@ export default class TaskList extends Component {
       .then(response => { console.log(response.data)});
 
     this.setState({
-      tasks: this.state.tasks.filter(el => el._id !== id)
+      tasks: this.state.task.filter(el => el._id !== id)
     })
   }
 
   taskList() {
-    return this.state.tasks.map(currenttask => {
+    return this.state.task.map(currenttask => {
       return <Task task={currenttask} deleteTask={this.deleteTask} key={currenttask._id}/>;
     })
   }

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const timeSchema = new Schema(
+const taskSchema = new Schema(
     {
         username: { type: String, required: true },
         task: { type: String, required: true },
@@ -18,6 +18,6 @@ const timeSchema = new Schema(
     }
 );
 
-const Time= mongoose.model('Time', timeSchema);
+ const newTask= mongoose.model('Task', taskSchema);
 
-module.exports = Time;
+module.exports = newTask;

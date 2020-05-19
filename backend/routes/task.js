@@ -1,8 +1,8 @@
 const router = require('express').Router();
-let Task = require('../models/task.model');
+let newTask = require('../models/task.model');
 
 router.route('/').get((req, res) => {
-  Task.find()
+  newTask.find()
     .then(task => res.json(task))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -15,7 +15,7 @@ router.route('/add').post((req, res) => {
   const startdate = Date.parse(req.body.startdate);
   const enddate = Date.parse(req.body.enddate);
 
-  $: newTask = new newTask({
+ const Task = new newTask({
     username,
     task,
     project,
@@ -24,40 +24,27 @@ router.route('/add').post((req, res) => {
    
   });
 
-  newTask.save()
+  Task.save()
   .then(() => res.json('Task added!'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-// Post request for Project
-// router.route('/add/project').post((req, res) => {
-//   const project = req.body.project;
 
-//   const newProject = new newProject({
-  
-//     project,
-   
-//   });
-
-//   newProject.save()
-//   .then(() => res.json('Project added!'))
-//   .catch(err => res.status(400).json('Error: ' + err));
-// });
 
 router.route('/:id').get((req, res) => {
-  Task.findById(req.params.id)
+  newTask.findById(req.params.id)
     .then(task => res.json(task))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/:id').delete((req, res) => {
-  Task.findByIdAndDelete(req.params.id)
+  newTask.findByIdAndDelete(req.params.id)
     .then(() => res.json('Task deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/update/:id').post((req, res) => {
-  Task.findById(req.params.id)
+  newTask.findById(req.params.id)
     .then(task => {
       task.username = req.body.username;
       task.task = req.body.task;

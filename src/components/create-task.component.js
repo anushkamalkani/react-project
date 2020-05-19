@@ -21,7 +21,7 @@ export default class CreateTask extends Component {
       startdate: new Date(),
       enddate: new Date(),
       users: [],
-      project: [],
+      projects: [],
 
     }
   }
@@ -30,6 +30,7 @@ export default class CreateTask extends Component {
     axios.get('http://localhost:5000/user/')
       .then(response => {
         if (response.data.length > 0) {
+          console.log("users", response.data)
           this.setState({
             users: response.data.map(user => user.username),
             username: response.data[0].username
@@ -44,8 +45,8 @@ export default class CreateTask extends Component {
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
-            project: response.data.map(user => user.project),
-            project: response.data[0].project
+            projects: response.data.map(project => project.Project),
+            project: response.data[0].Project
           })
         }
       })
@@ -75,14 +76,17 @@ export default class CreateTask extends Component {
   }
 
   onChangeStartDate(e) {
+    console.log(e)
     this.setState({
-      startdate: e.target.value
+      startdate: e
+      
     })
   }
   
   onChangeEndDate(e) {
+    
     this.setState({
-      enddate: e.target.value
+      enddate: e
     })
   }
 
@@ -93,8 +97,8 @@ export default class CreateTask extends Component {
       username: this.state.username,
       task: this.state.task,
       project: this.state.project,
-      startdate: this.state.date,
-      enddate: this.state.date,
+      startdate: this.state.startdate,
+      enddate: this.state.enddate,
     }
 
     console.log(task);
@@ -144,7 +148,8 @@ export default class CreateTask extends Component {
               value={this.state.project}
               onChange={this.onFocusProject}>
               {
-                this.state.project.map(function(project) {
+                this.state.projects.map(function(project) {
+                  console.log(project)
                   return <option 
                     key={project}
                     value={project}>{project}
