@@ -1,42 +1,36 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Timer from 'react-compound-timer';
 
-class Timer extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      count: 1
-    }
-  }
+class EntryTimer extends Component {
 
-  render () {
-    const {count} = this.state
+  render() {
     return (
-      <div>
-        {count}
-      </div>
+      <Timer initialTime={0} startImmediately={false}>
+        {({ start, resume, pause, stop, reset, timerState }) => (
+          <React.Fragment>
+            <div>
+              <Timer.Days /> days
+                <Timer.Hours /> hours
+                <Timer.Minutes /> minutes
+                <Timer.Seconds /> seconds
+                <Timer.Milliseconds /> milliseconds
+            </div>
+            <br />
+            <div className="TimerDiv"> Timer is {timerState.toLowerCase()}.</div>
+            <br />
+            <div>
+              <button className="btn btn-primary" onClick={start}>Start</button>&nbsp;
+              <button className="btn btn-primary" onClick={pause}>Pause</button>&nbsp;
+              <button className="btn btn-primary" onClick={resume}>Resume</button>&nbsp;
+              <button className="btn btn-primary" onClick={stop}>Stop</button>&nbsp;
+              <button className="btn btn-primary" onClick={reset}>Reset</button>
+            </div>
+          </React.Fragment>
+        )}
+      </Timer>
     )
   }
-  // setInterval
-  // clearInterval
-  componentDidMount () {
-    const {startCount} = this.props
-    this.setState({
-      count: startCount
-    })
-    this.doIntervalChange()
-  }
 
-  doIntervalChange = () => {
-      this.myInterval = setInterval(() => {
-      this.setState(prevState => ({
-        count: prevState.count + 1
-      }))
-    }, 1000)
-  }
-
-  componentWillUnmount () {
-    clearInterval(this.myInterval)
-  }
 }
 
-export default Timer
+export default EntryTimer;

@@ -41,7 +41,7 @@ export default class CreateTask extends Component {
         console.log(error);
       })
 
-      axios.get('http://localhost:5000/project/')
+    axios.get('http://localhost:5000/project/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -53,7 +53,7 @@ export default class CreateTask extends Component {
       .catch((error) => {
         console.log(error);
       })
- 
+
 
   }
 
@@ -79,12 +79,12 @@ export default class CreateTask extends Component {
     console.log(e)
     this.setState({
       startdate: e
-      
+
     })
   }
-  
+
   onChangeEndDate(e) {
-    
+
     this.setState({
       enddate: e
     })
@@ -111,85 +111,79 @@ export default class CreateTask extends Component {
 
   render() {
     return (
-    <div>
-      <h3>Create New Task Log</h3>
-      <form onSubmit={this.onSubmit}>
-        <div className="form-group"> 
-          <label>Username: </label>
-          <select ref="userInput"
+      <div>
+        <h3>Create New Task Log</h3>
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label>Username: </label>
+            <select ref="userInput"
               required
               className="form-control"
               placeholder="Username"
               value={this.state.username}
               onChange={this.onChangeUsername}>
               {
-                this.state.users.map(function(user) {
-                  return <option 
+                this.state.users.map(function (user) {
+                  return <option
                     key={user}
                     value={user}>{user}
-                    </option>;
+                  </option>;
                 })
               }
-          </select>
-        </div>
-        <div className="form-group"> 
-          <label>Task: </label>
-          <input  type="text"
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Task: </label>
+            <input type="text"
               required
               className="form-control"
               value={this.state.task}
               onChange={this.onChangeTask}
-              />
-        </div>
-        <div className="form-group"> 
-          <label>Project : </label>
-          <select ref="userInput"
+            />
+          </div>
+          <div className="form-group">
+            <label>Project : </label>
+            <select ref="userInput"
               required
               className="form-control"
               value={this.state.project}
               onChange={this.onFocusProject}>
               {
-                this.state.projects.map(function(project) {
+                this.state.projects.map(function (project) {
                   console.log(project)
-                  return <option 
+                  return <option
                     key={project}
                     value={project}>{project}
-                    </option>;
+                  </option>;
                 })
               }
-          </select>
-        </div>
-        
-        <div className="form-group">
-          <label>Start Date: </label>
-          <div>
-            <DatePicker
-              selected={this.state.startdate}
-              onChange={this.onChangeStartDate}
-            />
+            </select>
           </div>
-          <label>End Date: </label>
-          <div>
-            <DatePicker
-              selected={this.state.enddate}
-              onChange={this.onChangeEndDate}
-            />
-          </div>
-          {/* <div className="form-group">
-            <label>Counter</label>
-            <div>
-        <Timer startcount='0' />
-        </div>
-        </div> */}
-      </div >
-        
 
-        <div className="form-group">
-     
-          <input type="submit" value="Create Task Log" className="btn btn-primary" />
+          <div className="form-group">
+            <label>Start Date: </label>
+            <div>
+              <DatePicker
+                selected={this.state.startdate}
+                onChange={this.onChangeStartDate}
+              />
+            </div>
+            <label>End Date: </label>
+            <div>
+              <DatePicker
+                selected={this.state.enddate}
+                onChange={this.onChangeEndDate}
+              />
+            </div>
+          </div >
+          <div className="form-group">
+            <input type="submit" value="Create Task Log" className="btn btn-primary" />
+          </div>
+        </form>
+        <div>
+          <Timer />
         </div>
-      </form>
-    </div>
+      </div>
     )
   }
 }
