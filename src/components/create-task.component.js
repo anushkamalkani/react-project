@@ -119,6 +119,7 @@ export default class CreateTask extends Component {
           <select ref="userInput"
               required
               className="form-control"
+              placeholder="Username"
               value={this.state.username}
               onChange={this.onChangeUsername}>
               {
