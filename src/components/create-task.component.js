@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
+import Timer from "./timer.component";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default class CreateTask extends Component {
@@ -20,7 +21,7 @@ export default class CreateTask extends Component {
       startdate: new Date(),
       enddate: new Date(),
       users: [],
-      project: '',
+      project: [],
 
     }
   }
@@ -39,7 +40,7 @@ export default class CreateTask extends Component {
         console.log(error);
       })
 
-      axios.get('http://localhost:5000/user/')
+      axios.get('http://localhost:5000/project/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -137,11 +138,11 @@ export default class CreateTask extends Component {
         </div>
         <div className="form-group"> 
           <label>Project : </label>
-          <select 
+          <select ref="userInput"
               required
               className="form-control"
               value={this.state.project}
-              onFocus={this.onFocusProject}>
+              onChange={this.onFocusProject}>
               {
                 this.state.project.map(function(project) {
                   return <option 
@@ -168,9 +169,17 @@ export default class CreateTask extends Component {
               onChange={this.onChangeEndDate}
             />
           </div>
+          {/* <div className="form-group">
+            <label>Counter</label>
+            <div>
+        <Timer startcount='0' />
         </div>
+        </div> */}
+      </div >
+        
 
         <div className="form-group">
+     
           <input type="submit" value="Create Task Log" className="btn btn-primary" />
         </div>
       </form>

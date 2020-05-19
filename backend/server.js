@@ -20,9 +20,11 @@ connection.once('open', () => {
 
 const taskRouter = require('./routes/task');
 const userRouter = require('./routes/user');
+const projectRouter = require('./routes/project');
 
 app.use('/task', taskRouter);
 app.use('/user', userRouter);
+app.use('/project', projectRouter);
 
 
 app.listen(port, () => {

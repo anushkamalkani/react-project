@@ -30,19 +30,19 @@ router.route('/add').post((req, res) => {
 });
 
 // Post request for Project
-router.route('/add/project').post((req, res) => {
-  const project = req.body.project;
+// router.route('/add/project').post((req, res) => {
+//   const project = req.body.project;
 
-  const newProject = new newProject({
+//   const newProject = new newProject({
   
-    project,
+//     project,
    
-  });
+//   });
 
-  newProject.save()
-  .then(() => res.json('Project added!'))
-  .catch(err => res.status(400).json('Error: ' + err));
-});
+//   newProject.save()
+//   .then(() => res.json('Project added!'))
+//   .catch(err => res.status(400).json('Error: ' + err));
+// });
 
 router.route('/:id').get((req, res) => {
   Task.findById(req.params.id)
