@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
-## 'nodemone server'
+## 'nodemon server'
 
 To start the server for backend and implementation of database
 
